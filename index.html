@@ -1,0 +1,53 @@
+<!--
+Estructura Bàsica (index.html)
+» Hauràs de crear l'estructura HTML bàsica per a la teva aplicació. Aquesta estructura hauria d'incloure:
+Un contenidor principal per a tot el contingut de la pàgina, que encapsuli la teva aplicació.
+Una capçalera de la pàgina () que contingui:
+Un títol principal () per a la teva aplicació.
+Una secció dedicada als controls i la interacció ( o si no és navegació principal) que albergarà:
+- Un selector () amb dues opcions: "Utilitza Fetch" i "Utilitza Axios". Un camp d'entrada de text () amb un placeholder per a la cerca.
+- Un botó () per "Obtenir Dades".
+- La secció principal del contingut () de la teva aplicació, que albergarà:
+- Un element per mostrar l'estat de càrrega ().
+- Un element per mostrar missatges d'error (). Recorda que inicialment ha d'estar ocult.
+- Una secció de resultats (o) on es mostraran les dades obtingudes de l'API.
+- Una secció per a la paginació ( o ) que contindrà els botons per navegar per les pàgines.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La meva aplicació</title>
+</head>
+<body>
+    <main>
+    <header>
+        <h1>La meva aplicació</h1>
+    </header>
+    <section>
+        <select name="" id="selection-id">
+            <option value="text">Utilitza Fetch</option>
+            <option value="text">Utilitza Axios</option>
+        </select>
+
+        <input type="text" placeholder="Fes la teva cerca aquí">
+        <button>Obtenir dades</button>
+    </section>
+    <section>
+        <div id="load-element-id"></div>
+        <div id="error-message-id"></div>
+        <div id="result-api-id"></div>
+        <div>
+            <button class="btn__arrow-left">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg>
+            </button>
+            <button class="arrow-right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg>
+            </button>
+        </div>
+    </section>
+    </main>
+</body>
+</html>
