@@ -6,27 +6,43 @@ const itemsPerPage = 6; // Quants ítems per pàgina vols mostrar
 // apiSelector, searchInput, fetchButton, loadingElement, errorElement, resultsContainer, paginationContainer
 // ... (Obtén les referències amb document.getElementById)
 
+const apiSelector = document.getElementById("selection-id")
+const searchInput = document.getElementById("search-input-id")
+const fetchButton = document.getElementById("search-btn-id")
+const loadingElement = document.getElementById("load-element-id")
+const errorElement = document.getElementById("error-message-id")
+const resultsContainer = document.getElementById("result-api-id")
+const paginationContainer = document.getElementById("pages-id")
+
 // Event Listener per al botó "Obtenir Dades"
 // ... (Afegeix l'event listener al fetchButton per cridar fetchData)
+
+fetchButton.addEventListener('click', fetchData)
 
 // Funció per mostrar l'indicador de càrrega
 function showLoading() {
     // ... (Elimina la classe 'hidden' de loadingElement)
+    loadingElement.classList.remove('hidden')
 }
 
 // Funció per amagar l'indicador de càrrega
 function hideLoading() {
     // ... (Afegeix la classe 'hidden' a loadingElement)
+    loadingElement.classList.add('hidden')
 }
 
 // Funció per mostrar missatges d'error
 function showError(message) {
     // ... (Actualitza el text de errorElement i elimina la classe 'hidden')
+    errorElement.innerHTML = "Error: No s'han pogut obtenir les dades"
+
+    errorElement.classList.remove('hidden')
 }
 
 // Funció per amagar missatges d'error
 function hideError() {
     // ... (Afegeix la classe 'hidden' a errorElement)
+    errorElement.classList.add('hidden')
 }
 
 // Funció principal per obtenir dades (a implementar)
