@@ -1,6 +1,9 @@
+import axios from "../api-consumer-app/node_modules/axios";
+
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 let currentPage = 1;
-const itemsPerPage = 6; // Quants ítems per pàgina vols mostrar
+const itemsPerPage = 10; // Quants ítems per pàgina vols mostrar
+const items = []
 
 // Referències als elements del DOM:
 // apiSelector, searchInput, fetchButton, loadingElement, errorElement, resultsContainer, paginationContainer
@@ -34,7 +37,7 @@ function hideLoading() {
 // Funció per mostrar missatges d'error
 function showError(message) {
     // ... (Actualitza el text de errorElement i elimina la classe 'hidden')
-    errorElement.innerHTML = "Error: No s'han pogut obtenir les dades"
+    errorElement.innerHTML = `Error: No s'han pogut obtenir les dades: ${message}`
 
     errorElement.classList.remove('hidden')
 }
@@ -47,21 +50,32 @@ function hideError() {
 
 // Funció principal per obtenir dades (a implementar)
 async function fetchData() {
-    const searchTerm = /* ... (Obtén el valor de searchInput) */;
-    const useAxios = /* ... (Comprova si apiSelector.value és 'axios') */;
-    
+    const searchTerm = searchInput.value.toLowerCase() /* ... (Obtén el valor de searchInput) */;
+    let useAxios;
+    /* ... (Comprova si apiSelector.value és 'axios') */;
+    if(apiSelector.value === 'axios'){
+        useAxios = true
+    } else{
+        useAxios = false
+    }
+
+
     showLoading();
     hideError();
     // ... (Neteja resultats anteriors i paginació anterior)
 
+
     try {
         if (useAxios) {
             // ... (Crida la funció per obtenir dades amb Axios)
+            fetchDataWithAxios(searchTerm)
         } else {
             // ... (Crida la funció per obtenir dades amb Fetch)
+            fetchDataWithFetch(searchTerm)
         }
     } catch (error) {
         // ... (Gestiona errors inesperats si s'escapen de les funcions específiques de Fetch/Axios)
+        showError()
     } finally {
         hideLoading();
     }
@@ -70,6 +84,7 @@ async function fetchData() {
 // Funció per a la visualització dels resultats i la paginació (a implementar)
 function displayResults(items, totalItems) {
     // ... (Implementa la lògica per mostrar cada "ítem" com una targeta i per cridar setupPagination)
+    
 }
 
 function setupPagination(totalItems) {
@@ -79,10 +94,27 @@ function setupPagination(totalItems) {
 // Funció per obtenir dades amb Fetch (a implementar)
 async function fetchDataWithFetch(searchTerm) {
     // ... (Implementa la petició amb Fetch API)
+    
+    try{
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${currentPage}&_limit=${itemsPerPage}&q=${searchTerm}`)
+
+        if(!response.ok){
+            throw new Error(`Error HTTP: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        const totalItems = response.headers.get('X-Total-Count')
+
+        displayResults(data, totalItems)
+    }
+    
+    catch(error){
+        showError(error.message)
+    }    
 }
 
-// Funció per obtenir dades amb Axios (a implementar)
-                                                                                    
+// Funció per obtenir dades amb Axios (a implementar)                   
 async function fetchDataWithAxios(searchTerm) {
     // ... (Implementa la petició amb Axios)
 }
