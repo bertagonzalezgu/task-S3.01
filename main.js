@@ -63,15 +63,16 @@ async function fetchData() {
     showLoading();
     hideError();
     // ... (Neteja resultats anteriors i paginació anterior)
-
+    resultsContainer.innerHTML = ''
+    paginationContainer.innerHTML = ''
 
     try {
         if (useAxios) {
             // ... (Crida la funció per obtenir dades amb Axios)
-            fetchDataWithAxios(searchTerm)
+            await fetchDataWithAxios(searchTerm)
         } else {
             // ... (Crida la funció per obtenir dades amb Fetch)
-            fetchDataWithFetch(searchTerm)
+            await fetchDataWithFetch(searchTerm)
         }
     } catch (error) {
         // ... (Gestiona errors inesperats si s'escapen de les funcions específiques de Fetch/Axios)
@@ -84,11 +85,31 @@ async function fetchData() {
 // Funció per a la visualització dels resultats i la paginació (a implementar)
 function displayResults(items, totalItems) {
     // ... (Implementa la lògica per mostrar cada "ítem" com una targeta i per cridar setupPagination)
-    
+    resultsContainer.innerHTML = ''
+    const itemCard = items.map(p => `
+    <div class="card" data-user="${p.userId}" data-id="${p.id}" data-title="${p.title.toLowerCase()}" data-body="${p.body.toLowerCase()}">
+      <div class="card-body">
+        <h3>${p.userId}</h3>
+        <p class="id">${p.id}</p>
+        <p class="title">${p.title.toLowerCase()}</p>
+        <p class="body">${p.body.toLowerCase()}</p>
+      </div>
+    </div>
+    `).join('')
+
+    if(items.length === 0){
+        resultsContainer.innerHTML = `No s'han trobat resultats`
+    }else{
+        resultsContainer.innerHTML = `${itemCard}`
+    }
+
+    setupPagination(totalItems)
 }
 
 function setupPagination(totalItems) {
     // ... (Implementa la lògica per crear els botons de paginació)
+
+
 }
 
 // Funció per obtenir dades amb Fetch (a implementar)
