@@ -76,7 +76,7 @@ async function fetchData() {
         }
     } catch (error) {
         // ... (Gestiona errors inesperats si s'escapen de les funcions específiques de Fetch/Axios)
-        showError()
+        showError(error.message)
     } finally {
         hideLoading();
     }
@@ -108,6 +108,26 @@ function displayResults(items, totalItems) {
 
 function setupPagination(totalItems) {
     // ... (Implementa la lògica per crear els botons de paginació)
+
+    paginationContainer.innerHTML = ''
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage)
+
+    for(let i = 1; i <= totalPages;  i++){
+        const btnPage = document.createElement('button')
+        btnPage.textContent = i
+
+        if(i === currentPage){
+            btnPage.disabled = true
+        }
+
+        btnPage.addEventListener('click', () => {
+            currentPage = i
+            fetchData()
+        })
+
+        paginationContainer.appendChild(btnPage)
+    }
 
 
 }
