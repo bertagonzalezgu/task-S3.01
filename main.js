@@ -1,4 +1,4 @@
-import axios from "../api-consumer-app/node_modules/axios";
+import axios from "https://cdn.jsdelivr.net/npm/axios/+esm";
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 let currentPage = 1;
