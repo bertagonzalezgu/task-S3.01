@@ -27,10 +27,11 @@ Estils per als botons de paginació (.pagination button), incloent l'estat :disa
 }
 
 :root {
-    --color-primary: #6771df;
+    --color-primary: #272e7c;
     --color-secondary: #f1ff88;
     --color-white: #FFFFFF;
     --color-black: #000000;
+    --color-grey: #e1e1e1;
 }
 
 * {
@@ -41,7 +42,7 @@ Estils per als botons de paginació (.pagination button), incloent l'estat :disa
 
 body {
     margin: 0;
-    background-color: var(--color-secondary);
+    background-color: var(--color-white);
     font-family: "Montserrat Regular";
 }
 
@@ -62,6 +63,89 @@ h1{
     gap: 10px;
 }
 
+#selection-id{
+    background: var(--color-white);
+    font-family: "Montserrat Regular";
+    padding: 5px;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+}
 
+#search-input-id{
+    background: var(--color-white);
+    font-family: "Montserrat Regular";
+    padding: 5px;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+}
 
+#search-btn-id{
+    background: var(--color-secondary);
+    color: var(--color-black);
+    font-family: "Montserrat Regular";
+    padding: 5px;
+    border: 1px solid var(--color-primary);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#result-api-id{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 20px;
+    gap: 20px;
+}
+
+.card{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body{
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    background: var(--color-secondary);
+    padding: 20px;
+    gap: 20px;
+    border-radius: 5px;
+}
+
+#pages-id{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 20px;
+}
+
+#pagination-id button{
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: none;
+    margin: 5px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#pagination-id button:disabled{
+    color: var(--color-secondary);
+    background: var(--color-primary);
+    border: none;
+}
+
+#btn__arrow-left, #btn__arrow-right{
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 

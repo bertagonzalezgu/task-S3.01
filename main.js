@@ -1,7 +1,7 @@
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 let currentPage = 1;
-const itemsPerPage = 10; // Quants ítems per pàgina vols mostrar
+const itemsPerPage = 12; // Quants ítems per pàgina vols mostrar
 const items = []
 
 // Referències als elements del DOM:
@@ -101,11 +101,10 @@ function displayResults(items, totalItems) {
     // ... (Implementa la lògica per mostrar cada "ítem" com una targeta i per cridar setupPagination)
     resultsContainer.innerHTML = ''
     const itemCard = items.map(p => `
-    <div class="card" data-user="${p.userId}" data-id="${p.id}" data-title="${p.title.toLowerCase()}" data-body="${p.body.toLowerCase()}">
+    <div class="card" data-id="${p.id}" data-title="${p.title.toLowerCase()}" data-body="${p.body.toLowerCase()}">
       <div class="card-body">
-        <h3>${p.userId}</h3>
-        <p class="id">${p.id}</p>
-        <p class="title">${p.title.toLowerCase()}</p>
+        <h3>${p.id}</h3>
+        <h4 class="title">${p.title.toLowerCase()}</h4>
         <p class="body">${p.body.toLowerCase()}</p>
       </div>
     </div>
@@ -192,7 +191,7 @@ async function fetchDataWithAxios(searchTerm) {
         }
         );
 
-        const totalItems = response.headers('x-total-count')
+        const totalItems = response.headers['x-total-count']
         displayResults(response.data, totalItems)
 
     } catch (error) {
