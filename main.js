@@ -145,7 +145,6 @@ async function fetchDataWithFetch(searchTerm) {
         const data = await response.json()
 
         const totalItems = response.headers.get('X-Total-Count')
-
         displayResults(data, totalItems)
     }
     
@@ -157,23 +156,21 @@ async function fetchDataWithFetch(searchTerm) {
 // Funció per obtenir dades amb Axios (a implementar)                   
 async function fetchDataWithAxios(searchTerm) {
     // ... (Implementa la petició amb Axios)
-    const getCards = async () => {
     try {
         const response = await axios.get(API_URL,
         {
             params: {
             _page: currentPage,
             _limit: itemsPerPage,
-            searchInput: searchTerm
+            q: searchTerm
             },
         }
         );
-        console.log(response.data);
-    } catch (error) {
-        error.response?.statusText;
-    } finally {
-        response.headers['x-total-count']
+
+        const totalItems = response.headers.get('X-Total-Count')
         displayResults(response.data, totalItems)
+
+    } catch (error) {
+        showError(error.message)
     }
-    };
 }
