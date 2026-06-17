@@ -20,13 +20,14 @@ Una secció dedicada als controls i la interacció ( o si no és navegació prin
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La meva aplicació</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
     <main>
     <header>
         <h1>La meva aplicació</h1>
     </header>
-    <section>
+    <section class="search-row">
         <select name="" id="selection-id">
             <option value="fetch" id="fetch-id">Utilitza Fetch</option>
             <option value="axios" id="axios-id">Utilitza Axios</option>
@@ -39,18 +40,17 @@ Una secció dedicada als controls i la interacció ( o si no és navegació prin
         <div id="error-message-id" class="hidden"></div>
         <div id="result-api-id"></div>
         <div id="pages-id">
-            <button class="btn__arrow-left">
+            <button id="btn__arrow-left" class="hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0"/></svg>
             </button>
             <div id="pagination-id"></div>
-            <button class="arrow-right">
+            <button id="btn__arrow-right" class="hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/></svg>
             </button>
         </div>
     </section>
     </main>
-
-    <script type="module" src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.7.9/dist/axios.min.js"></script>
+    <script type="module" src="main.js"></script>
 </body>
 </html>

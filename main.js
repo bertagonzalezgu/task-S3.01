@@ -16,10 +16,25 @@ const errorElement = document.getElementById("error-message-id")
 const resultsContainer = document.getElementById("result-api-id")
 const paginationContainer = document.getElementById("pagination-id")
 
+const btnArrowLeft = document.getElementById("btn__arrow-left")
+const btnArrowRight = document.getElementById("btn__arrow-right")
+
 // Event Listener per al botó "Obtenir Dades"
 // ... (Afegeix l'event listener al fetchButton per cridar fetchData)
 
 fetchButton.addEventListener('click', fetchData)
+
+btnArrowLeft.addEventListener('click', () => {
+    if(currentPage > 1){
+        currentPage--
+        fetchData()
+    }
+})
+
+btnArrowRight.addEventListener('click', () => {
+    currentPage++
+    fetchData()
+})
 
 // Funció per mostrar l'indicador de càrrega
 function showLoading() {
@@ -112,6 +127,18 @@ function setupPagination(totalItems) {
 
     const totalPages = Math.ceil(totalItems / itemsPerPage)
 
+    if(totalPages <= 1){
+        btnArrowLeft.classList.add('hidden')
+        btnArrowRight.classList.add('hidden')
+        return
+    }
+
+    btnArrowLeft.classList.remove('hidden')
+    btnArrowRight.classList.remove('hidden')
+
+    btnArrowLeft.disabled = (currentPage === 1)
+    btnArrowRight.disabled = (currentPage === totalPages)
+
     for(let i = 1; i <= totalPages;  i++){
         const btnPage = document.createElement('button')
         btnPage.textContent = i
@@ -126,9 +153,7 @@ function setupPagination(totalItems) {
         })
 
         paginationContainer.appendChild(btnPage)
-    }
-
-
+    } 
 }
 
 // Funció per obtenir dades amb Fetch (a implementar)
@@ -167,7 +192,7 @@ async function fetchDataWithAxios(searchTerm) {
         }
         );
 
-        const totalItems = response.headers.get('X-Total-Count')
+        const totalItems = response.headers('x-total-count')
         displayResults(response.data, totalItems)
 
     } catch (error) {

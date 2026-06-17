@@ -10,3 +10,58 @@ Estils per la visualització dels resultats (#results), utilitzant CSS Grid per 
 Estils per a les "targetes" individuals de dades (.card), incloent-hi vores, ombres, padding i un efecte de :hover.
 Estils per als botons de paginació (.pagination button), incloent l'estat :disabled.
 */
+
+@font-face {
+    font-family: "Montserrat Regular";
+    src: url(./src/fonts/Montserrat-Regular.woff);
+}
+
+@font-face {
+    font-family: "Montserrat Light";
+    src: url(./src/fonts/Montserrat-Light.woff);
+}
+
+@font-face {
+    font-family: "Montserrat Medium";
+    src: url(./src/fonts/Montserrat-Medium.woff);
+}
+
+:root {
+    --color-primary: #6771df;
+    --color-secondary: #f1ff88;
+    --color-white: #FFFFFF;
+    --color-black: #000000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--color-secondary);
+    font-family: "Montserrat Regular";
+}
+
+.hidden{
+    display: none !important;
+}
+
+h1{
+    width: 100%;
+    padding: 20px;
+    font-family: "Montserrat Regular";
+}
+
+.search-row{
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    gap: 10px;
+}
+
+
+
+
