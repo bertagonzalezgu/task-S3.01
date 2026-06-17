@@ -1,4 +1,3 @@
-import axios from "https://cdn.jsdelivr.net/npm/axios/+esm";
 
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 let currentPage = 1;
@@ -15,7 +14,7 @@ const fetchButton = document.getElementById("search-btn-id")
 const loadingElement = document.getElementById("load-element-id")
 const errorElement = document.getElementById("error-message-id")
 const resultsContainer = document.getElementById("result-api-id")
-const paginationContainer = document.getElementById("pages-id")
+const paginationContainer = document.getElementById("pagination-id")
 
 // Event Listener per al botó "Obtenir Dades"
 // ... (Afegeix l'event listener al fetchButton per cridar fetchData)
@@ -158,4 +157,23 @@ async function fetchDataWithFetch(searchTerm) {
 // Funció per obtenir dades amb Axios (a implementar)                   
 async function fetchDataWithAxios(searchTerm) {
     // ... (Implementa la petició amb Axios)
+    const getCards = async () => {
+    try {
+        const response = await axios.get(API_URL,
+        {
+            params: {
+            _page: currentPage,
+            _limit: itemsPerPage,
+            searchInput: searchTerm
+            },
+        }
+        );
+        console.log(response.data);
+    } catch (error) {
+        error.response?.statusText;
+    } finally {
+        response.headers['x-total-count']
+        displayResults(response.data, totalItems)
+    }
+    };
 }
