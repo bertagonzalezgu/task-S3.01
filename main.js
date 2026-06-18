@@ -1,12 +1,6 @@
-
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 let currentPage = 1;
-const itemsPerPage = 12; // Quants ítems per pàgina vols mostrar
-const items = []
-
-// Referències als elements del DOM:
-// apiSelector, searchInput, fetchButton, loadingElement, errorElement, resultsContainer, paginationContainer
-// ... (Obtén les referències amb document.getElementById)
+const itemsPerPage = 12;
 
 const apiSelector = document.getElementById("selection-id")
 const searchInput = document.getElementById("search-input-id")
@@ -18,9 +12,6 @@ const paginationContainer = document.getElementById("pagination-id")
 
 const btnArrowLeft = document.getElementById("btn__arrow-left")
 const btnArrowRight = document.getElementById("btn__arrow-right")
-
-// Event Listener per al botó "Obtenir Dades"
-// ... (Afegeix l'event listener al fetchButton per cridar fetchData)
 
 fetchButton.addEventListener('click', fetchData)
 
@@ -36,69 +27,52 @@ btnArrowRight.addEventListener('click', () => {
     fetchData()
 })
 
-// Funció per mostrar l'indicador de càrrega
 function showLoading() {
-    // ... (Elimina la classe 'hidden' de loadingElement)
     loadingElement.classList.remove('hidden')
 }
 
-// Funció per amagar l'indicador de càrrega
 function hideLoading() {
-    // ... (Afegeix la classe 'hidden' a loadingElement)
     loadingElement.classList.add('hidden')
 }
 
-// Funció per mostrar missatges d'error
 function showError(message) {
-    // ... (Actualitza el text de errorElement i elimina la classe 'hidden')
     errorElement.innerHTML = `Error: No s'han pogut obtenir les dades: ${message}`
 
     errorElement.classList.remove('hidden')
 }
 
-// Funció per amagar missatges d'error
 function hideError() {
-    // ... (Afegeix la classe 'hidden' a errorElement)
     errorElement.classList.add('hidden')
 }
 
-// Funció principal per obtenir dades (a implementar)
 async function fetchData() {
-    const searchTerm = searchInput.value.toLowerCase() /* ... (Obtén el valor de searchInput) */;
+    const searchTerm = searchInput.value.toLowerCase()
     let useAxios;
-    /* ... (Comprova si apiSelector.value és 'axios') */;
     if(apiSelector.value === 'axios'){
         useAxios = true
     } else{
         useAxios = false
     }
 
-
     showLoading();
     hideError();
-    // ... (Neteja resultats anteriors i paginació anterior)
     resultsContainer.innerHTML = ''
     paginationContainer.innerHTML = ''
 
     try {
         if (useAxios) {
-            // ... (Crida la funció per obtenir dades amb Axios)
             await fetchDataWithAxios(searchTerm)
         } else {
-            // ... (Crida la funció per obtenir dades amb Fetch)
             await fetchDataWithFetch(searchTerm)
         }
     } catch (error) {
-        // ... (Gestiona errors inesperats si s'escapen de les funcions específiques de Fetch/Axios)
         showError(error.message)
     } finally {
         hideLoading();
     }
 }
 
-// Funció per a la visualització dels resultats i la paginació (a implementar)
 function displayResults(items, totalItems) {
-    // ... (Implementa la lògica per mostrar cada "ítem" com una targeta i per cridar setupPagination)
     resultsContainer.innerHTML = ''
     const itemCard = items.map(p => `
     <div class="card" data-id="${p.id}" data-title="${p.title.toLowerCase()}" data-body="${p.body.toLowerCase()}">
@@ -111,7 +85,7 @@ function displayResults(items, totalItems) {
     `).join('')
 
     if(items.length === 0){
-        resultsContainer.innerHTML = `No s'han trobat resultats`
+        showError(error.message)
     }else{
         resultsContainer.innerHTML = `${itemCard}`
     }
@@ -120,8 +94,6 @@ function displayResults(items, totalItems) {
 }
 
 function setupPagination(totalItems) {
-    // ... (Implementa la lògica per crear els botons de paginació)
-
     paginationContainer.innerHTML = ''
 
     const totalPages = Math.ceil(totalItems / itemsPerPage)
@@ -129,11 +101,11 @@ function setupPagination(totalItems) {
     if(totalPages <= 1){
         btnArrowLeft.classList.add('hidden')
         btnArrowRight.classList.add('hidden')
-        return
+        
+    } else{
+        btnArrowLeft.classList.remove('hidden')
+        btnArrowRight.classList.remove('hidden')
     }
-
-    btnArrowLeft.classList.remove('hidden')
-    btnArrowRight.classList.remove('hidden')
 
     btnArrowLeft.disabled = (currentPage === 1)
     btnArrowRight.disabled = (currentPage === totalPages)
@@ -155,9 +127,7 @@ function setupPagination(totalItems) {
     } 
 }
 
-// Funció per obtenir dades amb Fetch (a implementar)
 async function fetchDataWithFetch(searchTerm) {
-    // ... (Implementa la petició amb Fetch API)
     
     try{
         const response = await fetch(`https://jsonplaceholder.typicode.com/posts?_page=${currentPage}&_limit=${itemsPerPage}&q=${searchTerm}`)
@@ -177,9 +147,7 @@ async function fetchDataWithFetch(searchTerm) {
     }    
 }
 
-// Funció per obtenir dades amb Axios (a implementar)                   
 async function fetchDataWithAxios(searchTerm) {
-    // ... (Implementa la petició amb Axios)
     try {
         const response = await axios.get(API_URL,
         {
