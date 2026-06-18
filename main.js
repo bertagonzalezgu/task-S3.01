@@ -36,7 +36,10 @@ function hideLoading() {
 }
 
 function showError(message) {
-    errorElement.innerHTML = `Error: No s'han pogut obtenir les dades: ${message}`
+
+    const errorMessage = message instanceof Error? message.message: message
+
+    errorElement.innerHTML = `Error: ${errorMessage}`
 
     errorElement.classList.remove('hidden')
 }
@@ -66,7 +69,7 @@ async function fetchData() {
             await fetchDataWithFetch(searchTerm)
         }
     } catch (error) {
-        showError(error.message)
+        showError(error)
     } finally {
         hideLoading();
     }
@@ -85,7 +88,7 @@ function displayResults(items, totalItems) {
     `).join('')
 
     if(items.length === 0){
-        showError(error.message)
+        showError(`No s'han trobat resultats`)
     }else{
         resultsContainer.innerHTML = `${itemCard}`
     }
@@ -143,7 +146,7 @@ async function fetchDataWithFetch(searchTerm) {
     }
     
     catch(error){
-        showError(error.message)
+        showError(error)
     }    
 }
 
@@ -163,6 +166,7 @@ async function fetchDataWithAxios(searchTerm) {
         displayResults(response.data, totalItems)
 
     } catch (error) {
-        showError(error.message)
+        const errmessage = error.response?.statusText || error.message
+        showError(errmessage)
     }
 }

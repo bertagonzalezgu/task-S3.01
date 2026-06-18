@@ -94,14 +94,14 @@ h1{
 #result-api-id{
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     padding: 20px;
     gap: 20px;
 }
 
 .spinner{
     display: block;
-    
+
 }
 
 #error-message-id{
@@ -131,6 +131,10 @@ h1{
     padding: 20px;
     gap: 20px;
     border-radius: 5px;
+}
+
+.card-body:hover{
+    box-shadow: 0px 0px 20px var(--color-primary);
 }
 
 #pages-id{
